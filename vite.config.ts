@@ -1,9 +1,13 @@
 
-  import { defineConfig } from 'vite';
+import { defineConfig } from 'vite';
   import react from '@vitejs/plugin-react-swc';
   import path from 'path';
 
-  export default defineConfig({
+const isVercel = process.env.VERCEL === '1';
+
+export default defineConfig({
+    // Use base for GitHub Pages; root base for Vercel
+    base: isVercel ? '/' : '/detalhespremiumcar/',
     plugins: [react()],
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
@@ -51,7 +55,7 @@
     },
     build: {
       target: 'esnext',
-      outDir: 'build',
+      outDir: 'dist',
     },
     server: {
       port: 3000,
